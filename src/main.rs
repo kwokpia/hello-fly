@@ -1,4 +1,4 @@
-use axum::{routing::get, Router};
+use axum::{routing::get, Router, serve::Server};
 use std::net::SocketAddr;
 
 #[tokio::main]
@@ -15,7 +15,7 @@ async fn main() {
     println!("Listening on {}", addr);
 
     // run app
-    axum::Server::bind(&addr)
+    Server::bind(&addr)
         .serve(app.into_make_service())
         .await
         .unwrap();
