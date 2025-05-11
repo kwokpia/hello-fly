@@ -1,22 +1,24 @@
-use axum::{routing::get, Router, serve::Server};
-use std::net::SocketAddr;
+//! Run with
+//!
+//! ```not_rust
+//! cargo run -p example-hello-world
+//! ```
+
+use axum::{response::Html, routing::get, Router};
 
 #[tokio::main]
 async fn main() {
-    // build app with a single route
-    let app = Router::new().route("/", get(|| async { "Hello, Fly.io from Rust!" }));
+    // build our application with a route
+    let app = Router::new().route("/", get(handler));
 
-    // Read PORT env var (Fly.io sets this)
-    let port = std::env::var("PORT")
-        .ok()
-        .and_then(|s| s.parse().ok())
-        .unwrap_or(8080);
-    let addr = SocketAddr::from(([0, 0, 0, 0], port));
-    println!("Listening on {}", addr);
-
-    // run app
-    Server::bind(&addr)
-        .serve(app.into_make_service())
+    // run it
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:8080")
         .await
         .unwrap();
+    println!("listening on {}", listener.local_addr().unwrap());
+    axum::serve(listener, app).await.unwrap();
+}
+
+async fn handler() -> Html<&'static str> {
+    Html("<h1>Hello, World!</h1>")
 }
