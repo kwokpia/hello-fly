@@ -2,7 +2,7 @@ name: Deploy to Fly.io
 
 on:
   push:
-    branches: [ master ]  # 或者 main，根据你的主分支而定
+    branches: [ main ]  # 或者 main，根据你的主分支而定
 
 jobs:
   deploy:
