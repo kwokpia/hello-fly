@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Fly.io Global Server Locations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // 🌍 初始化地图
+        const map = L.map("map").setView([10, 0], 2);
+
+        // 加载 OpenStreetMap 图层
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution:
+                '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+        }).addTo(map);
+
+        // ✅ Fly.io 部署区域及其经纬度
+        const locations = [
+            { name: "Hong Kong", code: "hkg", lat: 22.3193, lon: 114.1694 },
+            { name: "Mumbai, India", code: "bom", lat: 19.076, lon: 72.8777 },
+            { name: "Singapore", code: "sin", lat: 1.3521, lon: 103.8198 },
+            { name: "Sydney, Australia", code: "syd", lat: -33.8688, lon: 151.2093 },
+            { name: "Tokyo, Japan", code: "nrt", lat: 35.6895, lon: 139.6917 },
+            { name: "Ashburn, VA, USA", code: "iad", lat: 39.0438, lon: -77.4874 },
+            { name: "San Jose, CA, USA", code: "sjc", lat: 37.3382, lon: -121.8863 },
+            { name: "Toronto, Canada", code: "yyz", lat: 43.6511, lon: -79.3839 },
+            { name: "Santiago, Chile", code: "scl", lat: -33.4489, lon: -70.6693 },
+            { name: "Frankfurt, Germany", code: "fra", lat: 50.1109, lon: 8.6821 },
+            { name: "London, UK", code: "lhr", lat: 51.5074, lon: -0.1278 },
+            { name: "Johannesburg, South Africa", code: "jnb", lat: -26.2041, lon: 28.0473 },
+        ];
+
+        // 📍 添加每个部署位置的标记
+        locations.forEach((loc) => {
+            L.marker([loc.lat, loc.lon])
+                .addTo(map)
+                .bindPopup(`<b>${loc.name}</b><br>Region Code: ${loc.code}`);
+        });
+    </script>
+</body>
+
+</html>
