@@ -6,19 +6,18 @@
 app = 'kwokpia-hello-fly'
 primary_region = 'hkg'
 regions = [
-  'iad',
-  'ord',
-  'lax',
-  'scl',
-  'gdl',
-  'ams',
-  'fra',
-  'lhr',
-  'nrt',
-  'sin',
-  'bom',
-  'syd',
-  'jnb',
+  "hkg",
+  "bom",
+  "sin",
+  "syd",
+  "nrt",
+  "iad",
+  "sjc",
+  "yyz",
+  "scl",
+  "fra",
+  "lhr",
+  "jnb",
 ]
 
 [build]
